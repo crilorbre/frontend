@@ -1,0 +1,23 @@
+<div class="inputWithIcon">
+    <i class="fas fa-search"></i>
+    <input class="form-control" type="text" placeholder="Search" (keyup)="Search(word)" #word>    
+</div>
+<div class="row">
+    <div class="col-md-4" *ngFor="let game of games">
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white f-flex justify-content-between align-items-center">
+                {{game.title}}
+                <button  class = "btn btn-danger" (click)="deleteGame(game._id)">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+            <img [src]="game.image" class="card-img-top">
+            <div class="card-body">
+                <p>{{game.description}}</p>
+                <a [routerLink]="['edit', game.id]" class="btn btn-info btn-block">
+                    Edit game
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
