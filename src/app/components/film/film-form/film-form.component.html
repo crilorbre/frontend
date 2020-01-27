@@ -1,0 +1,62 @@
+<div class="col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit) = "form.valid && onSubmit()">
+                
+                <div class="form-group">
+                    <input type="text" placeholder="Title" class="form-control" autofocus
+                    formControlName="title" [ngClass]="{'is-invalid': form.get('title').touched && form.get('title').invalid}">
+                    <div *ngIf="form.get('title').touched && form.get('title').invalid" class="invalid-feedback">
+                        <div *ngIf="form.get('title').errors.required">Title is required</div>
+                        <div *ngIf="form.get('title').errors?.maxlength">Title is too long</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea name="description" placeholder="Description" rows="2" class="form-control"
+                    formControlName="description" [ngClass]="{'is-invalid' : form.get('description').touched && form.get('description').invalid} ">
+                    </textarea>
+                    <div *ngIf="form.get('description').touched && form.get('description').invalid" class="invalid-feedback">
+                        <div *ngIf="form.get('description').errors.required">Description is required</div>
+                        <div *ngIf="form.get('description').errors?.maxlength">Description is too long</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" placeholder="URL of image" class="form-control"
+                    formControlName="image" [ngClass]="{'is-invalid': form.get('image').touched && form.get('image').invalid}">
+                    <div *ngIf="form.get('image').touched && form.get('image').invalid" class="invalid-feedback">
+                        <div *ngIf="form.get('image').errors.required">Image is required</div>
+                        <div *ngIf="form.get('image').errors?.pattern">Pattern is not valid</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input [matDatepicker]="picker1" placeholder="Release date" class="form-control" formControlName="created_at">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </div>
+                
+                <div class="form-group">
+                    <mat-select formControlName="genre" class="form-control" placeholder="Genre">
+                        <mat-option>----</mat-option>
+                        <mat-option value="Action">Action</mat-option>
+                        <mat-option value="Dramatic">Dramatic</mat-option>
+                        <mat-option value="History">History</mat-option>   
+                        <mat-option value="Comedy">Comedy</mat-option>
+                        <mat-option value="Cartoon">Cartoon</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('genre').touched && form.get('genre').hasError('required')">Please choose an genre</mat-error>
+                </div>
+
+                <button class="btn btn-success btn-block" [disabled]="form.invalid">
+                    Save
+                </button>
+                <button class="btn btn-warning btn-block"  (click)="goToHome()">
+                    Back
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>

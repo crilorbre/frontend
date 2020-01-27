@@ -1,1 +1,53 @@
-<p>game-form works!</p>
+<div class="row">
+    <div class="col-md-4 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup] = "form" (ngSubmit)="form.valid && onSubmit()">
+
+                    <div class="form-group">
+                        <input matInput type="text" name="title" placeholder="Title" class="form-control" autofocus [(ngModel)]="form.title"
+                        formControlName="title" [ngClass]="{'is-invalid': form.get('title').touched && form.get('title').invalid}" >
+                        <div *ngIf="form.get('title').touched && form.get('title').invalid" class="invalid-feedback">
+                            <div *ngIf="form.get('title').errors.required">Title is required</div>
+                            <div *ngIf="form.get('title').errors?.maxlength">Title is too long</div>
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <textarea name="description"  placeholder="Description" rows="2" class="form-control" [(ngModel)]="form.description"
+                        formControlName="description" [ngClass]="{'is-invalid': form.get('description').touched && form.get('description').invalid}">>
+                        </textarea>
+                        <div *ngIf="form.get('description').touched && form.get('description').invalid" class="invalid-feedback">
+                            <div *ngIf="form.get('description').errors.required">Description is required</div>
+                            <div *ngIf="form.get('description').errors?.maxlength">Description is too long</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="url" name="image" placeholder="Image" class="form-control" [(ngModel)]="form.image"
+                        formControlName="image" [ngClass]="{'is-invalid': form.get('image').touched && form.get('image').invalid}">
+                        <div *ngIf="form.get('image').touched && form.get('image').invalid" class="invalid-feedback">
+                            <div *ngIf="form.get('image').errors.required">Image is required</div>
+                            <div *ngIf="form.get('image').errors?.pattern">Pattern is not valid</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block" [disabled]="form.invalid">
+                        Save
+                    </button>
+                    <button class="btn btn-warning btn-block"  (click)="goToHome()">
+                        Back
+                    </button>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-body text-center">
+            <img [src] = "form.get('image').invalid ? '/assets/no-image-icon.png' : form.image" class="card-img-top">
+            <h3>{{form.get('title').invalid ? 'Game title' : form.title}}</h3>
+            <p>{{form.get('description').invalid ? 'Game description' : form.description}}</p>
+            <p>{{edit == true ? (game.created_at| date: 'yyyy-MM-dd') : (date | date: 'yyyy-MM-dd') }} </p>
+        </div>
+    </div>
+</div>

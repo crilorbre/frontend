@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-4" *ngFor = "let film of films">
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white f-flex justify-content-between align-items-center">
+                {{film.title}}
+                <button class="btn btn-danger" (click) = "deleteFilm(film._id)">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+            <img [src]="film.image" class="card-img-top">
+            <div class="card-body">
+                <b>{{film.genre}}</b>
+                <p>{{film.created_at | date: 'yyyy-MM-dd'}}</p>
+                <p>{{film.description}}</p>
+                <a [routerLink]="['edit', film._id]" class="btn btn-info btn-block">
+                    Edit film
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

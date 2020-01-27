@@ -1,7 +1,9 @@
-export interface Game {
+export interface Film {
     _id?: String;
     title?: String;
     description?: String;
     image?: String;
-    created_at?: Date;
+    release_date?: Date;
+    genre?: String;
+
 }

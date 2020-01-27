@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as Material from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+//SERVICES
+import { GamesService } from "./services/games.service";
+import { FilmsService } from "./services/films.service";
+import { MatDialogService } from "./services/mat-dialog.service";
 
 //COMPONENTS
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +19,9 @@ import { GameFormComponent } from './components/game/game-form/game-form.compone
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
+import { FilmListComponent } from './components/film/film-list/film-list.component';
+import { FilmFormComponent } from './components/film/film-form/film-form.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +31,9 @@ import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-c
     GameFormComponent,
     HomeComponent,
     PageNotFoundComponent,
-    MatConfirmDialogComponent
+    MatConfirmDialogComponent,
+    FilmListComponent,
+    FilmFormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +41,15 @@ import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-c
     HttpClientModule,
     BrowserAnimationsModule,
     Material.MatDialogModule,
-    Material.MatIconModule
+    Material.MatIconModule,
+    Material.MatDatepickerModule,
+    Material.MatNativeDateModule,
+    Material.MatSelectModule,
+    Material.MatOptionModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [],
+  providers: [GamesService, FilmsService, MatDialogService],
   bootstrap: [AppComponent],
   entryComponents: [MatConfirmDialogComponent]
 })

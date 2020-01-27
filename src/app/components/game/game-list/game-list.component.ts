@@ -14,6 +14,10 @@ export class GameListComponent implements OnInit {
   constructor(private gameService: GamesService, private matDialogService: MatDialogService) { }
 
   ngOnInit() {
+    this.getGames()
+  }
+
+  getGames(){
     this.gameService.getGames().subscribe(
       res => {this.games = res,
         console.log(res)},
@@ -28,7 +32,7 @@ export class GameListComponent implements OnInit {
         this.gameService.deleteGame(id).subscribe(
           res=>{
             console.log(res);
-            this.ngOnInit();
+            this.getGames();
           },
           err => console.log(err)
         )
@@ -42,7 +46,7 @@ export class GameListComponent implements OnInit {
         res=> this.games = res,
         err => console.error(err))
     }else
-        this.games = this.ngOnInit();
+        this.games = this.getGames();
   }
 
 
