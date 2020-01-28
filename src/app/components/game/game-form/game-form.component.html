@@ -7,28 +7,22 @@
                     <div class="form-group">
                         <input matInput type="text" name="title" placeholder="Title" class="form-control" autofocus [(ngModel)]="form.title"
                         formControlName="title" [ngClass]="{'is-invalid': form.get('title').touched && form.get('title').invalid}" >
-                        <div *ngIf="form.get('title').touched && form.get('title').invalid" class="invalid-feedback">
-                            <div *ngIf="form.get('title').errors.required">Title is required</div>
-                            <div *ngIf="form.get('title').errors?.maxlength">Title is too long</div>
-                        </div>
+                        <mat-error *ngIf="form.get('title').touched && form.get('title').errors?.required">Title is required</mat-error>
+                        <mat-error *ngIf="form.get('title').touched && form.get('title').errors?.maxlength">Title is too long</mat-error>
                     </div>
                 
                     <div class="form-group">
                         <textarea name="description"  placeholder="Description" rows="2" class="form-control" [(ngModel)]="form.description"
                         formControlName="description" [ngClass]="{'is-invalid': form.get('description').touched && form.get('description').invalid}">>
                         </textarea>
-                        <div *ngIf="form.get('description').touched && form.get('description').invalid" class="invalid-feedback">
-                            <div *ngIf="form.get('description').errors.required">Description is required</div>
-                            <div *ngIf="form.get('description').errors?.maxlength">Description is too long</div>
-                        </div>
+                        <mat-error *ngIf="form.get('description').touched && form.get('description').errors?.required">Description is required</mat-error>
+                        <mat-error *ngIf="form.get('description').touched && form.get('description').errors?.maxlength">Description is too long</mat-error>
                     </div>
                     <div class="form-group">
                         <input type="url" name="image" placeholder="Image" class="form-control" [(ngModel)]="form.image"
                         formControlName="image" [ngClass]="{'is-invalid': form.get('image').touched && form.get('image').invalid}">
-                        <div *ngIf="form.get('image').touched && form.get('image').invalid" class="invalid-feedback">
-                            <div *ngIf="form.get('image').errors.required">Image is required</div>
-                            <div *ngIf="form.get('image').errors?.pattern">Pattern is not valid</div>
-                        </div>
+                        <mat-error *ngIf="form.get('image').touched && form.get('image').errors?.required">Image is required</mat-error>
+                        <mat-error *ngIf="form.get('image').touched && form.get('image').errors?.pattern">Pattern is not valid</mat-error>
                     </div>
                     <button class="btn btn-success btn-block" [disabled]="form.invalid">
                         Save

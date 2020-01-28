@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GamesService } from "./services/games.service";
 import { FilmsService } from "./services/films.service";
 import { MatDialogService } from "./services/mat-dialog.service";
+import { UserService } from "./services/users.service";
 
 //COMPONENTS
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MatConfirmDialogComponent } from './components/mat-confirm-dialog/mat-confirm-dialog.component';
 import { FilmListComponent } from './components/film/film-list/film-list.component';
 import { FilmFormComponent } from './components/film/film-form/film-form.component';
+import { SingUpComponent } from './components/user/sign-up/sing-up.component';
+import { SingInComponent } from './components/user/sign-in/sing-in.component';
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { FilmFormComponent } from './components/film/film-form/film-form.compone
     PageNotFoundComponent,
     MatConfirmDialogComponent,
     FilmListComponent,
-    FilmFormComponent
+    FilmFormComponent,
+    SingUpComponent,
+    SingInComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,7 @@ import { FilmFormComponent } from './components/film/film-form/film-form.compone
     FormsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [GamesService, FilmsService, MatDialogService],
+  providers: [GamesService, FilmsService, MatDialogService, UserService],
   bootstrap: [AppComponent],
   entryComponents: [MatConfirmDialogComponent]
 })

@@ -10,7 +10,7 @@
             <img [src]="film.image" class="card-img-top">
             <div class="card-body">
                 <b>{{film.genre}}</b>
-                <p>{{film.created_at | date: 'yyyy-MM-dd'}}</p>
+                <p>{{film.release_date | date: 'yyyy-MM-dd'}}</p>
                 <p>{{film.description}}</p>
                 <a [routerLink]="['edit', film._id]" class="btn btn-info btn-block">
                     Edit film

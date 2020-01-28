@@ -1,0 +1,11 @@
+div.jumbotron{
+    background-color: darkcyan;
+}
+
+#form {
+    padding: 10px;
+}
+
+input[type=text] {
+    border: none;
+}

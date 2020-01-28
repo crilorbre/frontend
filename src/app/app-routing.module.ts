@@ -7,6 +7,8 @@ import { GameListComponent } from '../app/components/game/game-list/game-list.co
 import { FilmListComponent } from './components/film/film-list/film-list.component';
 import { GameFormComponent } from './components/game/game-form/game-form.component';
 import { FilmFormComponent } from './components/film/film-form/film-form.component';
+import { SingUpComponent } from './components/user/sign-up/sing-up.component';
+import { SingInComponent } from './components/user/sign-in/sing-in.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,14 @@ const routes: Routes = [
   {
     path:'home',
     component: HomeComponent
+  },
+  {
+    path: 'sign-up',
+    component: SingUpComponent
+  },
+  {
+    path: 'login',
+    component: SingInComponent
   },
   {
     path: 'games',
