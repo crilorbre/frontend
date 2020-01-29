@@ -12,7 +12,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   signUp(user: User){
-    return this.http.post(`${this.API_URI}/users/singup`, user)
+    return this.http.post(`${this.API_URI}/users/signup`, user)
+  }
+
+  signIn(user: User){
+    return this.http.post(`${this.API_URI}/users/signin`, user)
   }
 
   getUserByEmail(email: String){

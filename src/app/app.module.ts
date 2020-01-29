@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as Material from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ToastrModule } from 'ngx-toastr';
 
 //SERVICES
 import { GamesService } from "./services/games.service";
@@ -45,6 +46,7 @@ import { SingInComponent } from './components/user/sign-in/sing-in.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     Material.MatDialogModule,
     Material.MatIconModule,
     Material.MatDatepickerModule,

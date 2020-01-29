@@ -3,6 +3,8 @@ import { FilmsService } from "../../../services/films.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Film } from 'src/app/models/Film';
 import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-film-form',
@@ -26,7 +28,8 @@ export class FilmFormComponent implements OnInit {
 
   edit: boolean = false;
 
-  constructor(private filmService: FilmsService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private filmService: FilmsService, private router: Router, 
+    private activatedRoute: ActivatedRoute, private toastrService: ToastrService) { }
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
@@ -51,6 +54,7 @@ export class FilmFormComponent implements OnInit {
       res => {
       console.log(res);
       this.router.navigate(['/films']);
+      this.toastrService.success('Film saved successful')
     },
       err => console.error(err)
     )
@@ -61,6 +65,7 @@ export class FilmFormComponent implements OnInit {
       res => {
         console.log(res);
         this.router.navigate(['/films']);
+        this.toastrService.success('Film updated successful')
       },
       err => console.error(err)
     );

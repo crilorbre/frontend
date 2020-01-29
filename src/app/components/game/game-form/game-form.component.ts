@@ -3,6 +3,8 @@ import { GamesService } from "../../../services/games.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Game } from 'src/app/models/Game';
 import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-game-form',
@@ -32,7 +34,8 @@ export class GameFormComponent implements OnInit {
 
   date = new Date();
 
-  constructor(private gameService: GamesService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private gameService: GamesService, private router: Router, 
+    private activatedRoute: ActivatedRoute, private toastrService: ToastrService) { }
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
@@ -55,6 +58,7 @@ export class GameFormComponent implements OnInit {
       res =>{
         console.log(res)
         this.router.navigate(['/games'])
+        this.toastrService.success('Game saved successful')
       },
       err => console.log(err)
     );
@@ -65,6 +69,8 @@ export class GameFormComponent implements OnInit {
       res=>{
         console.log(res);
         this.router.navigate(['/games']);
+        this.toastrService.success('Game updated successful')
+
       },
       err => console.log(err)
     );
