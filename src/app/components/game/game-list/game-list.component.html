@@ -7,16 +7,20 @@
         <div class="card text-center">
             <div class="card-header bg-dark text-white f-flex justify-content-between align-items-center">
                 {{game.title}}
-                <button  class = "btn btn-danger" (click)="deleteGame(game._id)">
-                    <i class="far fa-trash-alt"></i>
-                </button>
+                <ng-container *ngIf="userService.loggedIn()">
+                    <button  class = "btn btn-danger" (click)="deleteGame(game._id)">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </ng-container>
             </div>
             <img [src]="game.image" class="card-img-top">
             <div class="card-body">
                 <p>{{game.description}}</p>
-                <a [routerLink]="['edit', game._id]" class="btn btn-info btn-block">
-                    Edit game
-                </a>
+                <ng-container *ngIf="userService.loggedIn()">
+                    <a [routerLink]="['edit', game._id]" class="btn btn-info btn-block">
+                        Edit game
+                    </a>
+                </ng-container>
             </div>
         </div>
     </div>

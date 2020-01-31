@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as Material from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -11,6 +11,10 @@ import { GamesService } from "./services/games.service";
 import { FilmsService } from "./services/films.service";
 import { MatDialogService } from "./services/mat-dialog.service";
 import { UserService } from "./services/users.service";
+import { TokenInterceptorService } from "../app/services/token-interceptor.service";
+
+//GUARDS
+import { AuthGuard } from "../app/guards/auth.guard";
 
 //COMPONENTS
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +60,11 @@ import { SingInComponent } from './components/user/sign-in/sing-in.component';
     FormsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [GamesService, FilmsService, MatDialogService, UserService],
+  providers: [GamesService, FilmsService, MatDialogService, UserService, AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   entryComponents: [MatConfirmDialogComponent]
 })

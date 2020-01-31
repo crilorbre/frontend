@@ -1,3 +1,11 @@
 a {
     color: blue;
   }
+
+div.jumbotron{
+    background-color: darkcyan;
+}
+
+input[type=text] {
+    border: none;
+}

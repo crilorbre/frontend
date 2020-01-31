@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesService } from '../../../services/games.service';
 import { MatDialogService } from "../../../services/mat-dialog.service";
+import { UserService } from "../../../services/users.service";
 
 @Component({
   selector: 'app-game-list',
@@ -11,7 +12,8 @@ export class GameListComponent implements OnInit {
 
   games: any=[]
 
-  constructor(private gameService: GamesService, private matDialogService: MatDialogService) { }
+  constructor(private gameService: GamesService, private matDialogService: MatDialogService,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.getGames()

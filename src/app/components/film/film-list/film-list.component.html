@@ -3,18 +3,22 @@
         <div class="card text-center">
             <div class="card-header bg-dark text-white f-flex justify-content-between align-items-center">
                 {{film.title}}
-                <button class="btn btn-danger" (click) = "deleteFilm(film._id)">
-                    <i class="far fa-trash-alt"></i>
-                </button>
+                <ng-container *ngIf="userService.loggedIn()">
+                    <button class="btn btn-danger" (click) = "deleteFilm(film._id)">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </ng-container>
             </div>
             <img [src]="film.image" class="card-img-top">
             <div class="card-body">
                 <b>{{film.genre}}</b>
                 <p>{{film.release_date | date: 'yyyy-MM-dd'}}</p>
                 <p>{{film.description}}</p>
-                <a [routerLink]="['edit', film._id]" class="btn btn-info btn-block">
-                    Edit film
-                </a>
+                <ng-container *ngIf="userService.loggedIn()">
+                    <a [routerLink]="['edit', film._id]" class="btn btn-info btn-block">
+                        Edit film
+                    </a>
+                </ng-container>
             </div>
         </div>
     </div>

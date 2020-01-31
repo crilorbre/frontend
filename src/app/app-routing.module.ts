@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+//COMPONENTS
 import { HomeComponent } from '../app/components/home/home.component';
 import { PageNotFoundComponent } from '../app/components/page-not-found/page-not-found.component';
 import { GameListComponent } from '../app/components/game/game-list/game-list.component';
@@ -9,6 +10,9 @@ import { GameFormComponent } from './components/game/game-form/game-form.compone
 import { FilmFormComponent } from './components/film/film-form/film-form.component';
 import { SingUpComponent } from './components/user/sign-up/sing-up.component';
 import { SingInComponent } from './components/user/sign-in/sing-in.component';
+
+//GUARDS
+import { AuthGuard } from "../app/guards/auth.guard";
 
 
 const routes: Routes = [
@@ -22,11 +26,11 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'sign-up',
+    path: 'user/register',
     component: SingUpComponent
   },
   {
-    path: 'login',
+    path: 'user/login',
     component: SingInComponent
   },
   {
@@ -35,11 +39,13 @@ const routes: Routes = [
   },
   {
     path: 'games/add',
-    component: GameFormComponent
+    component: GameFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'games/edit/:id',
-    component: GameFormComponent
+    component: GameFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'films',
@@ -47,11 +53,13 @@ const routes: Routes = [
   },
   {
     path: 'films/add',
-    component: FilmFormComponent
+    component: FilmFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'films/edit/:id',
-    component: FilmFormComponent
+    component: FilmFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

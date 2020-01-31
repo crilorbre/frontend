@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from "../../../services/films.service";
 import { MatDialogService } from "../../../services/mat-dialog.service";
+import { UserService } from "../../../services/users.service";
 
 @Component({
   selector: 'app-film-list',
@@ -11,7 +12,8 @@ export class FilmListComponent implements OnInit {
 
   films: any = [];
 
-  constructor(private filmService: FilmsService, private dialogService: MatDialogService ) { }
+  constructor(private filmService: FilmsService, private dialogService: MatDialogService,
+    private userService: UserService ) { }
 
   ngOnInit() {
     this.getFilms()
