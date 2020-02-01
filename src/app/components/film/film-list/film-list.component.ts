@@ -11,6 +11,7 @@ import { UserService } from "../../../services/users.service";
 export class FilmListComponent implements OnInit {
 
   films: any = [];
+  currentPage: Number = 1;
 
   constructor(private filmService: FilmsService, private dialogService: MatDialogService,
     private userService: UserService ) { }

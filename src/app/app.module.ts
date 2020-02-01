@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as Material from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from "ngx-pagination";
 
 //SERVICES
 import { GamesService } from "./services/games.service";
@@ -58,7 +59,8 @@ import { SingInComponent } from './components/user/sign-in/sing-in.component';
     Material.MatSelectModule,
     Material.MatOptionModule,
     FormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    NgxPaginationModule
   ],
   providers: [GamesService, FilmsService, MatDialogService, UserService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
