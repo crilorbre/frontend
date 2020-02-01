@@ -16,6 +16,8 @@ import { TokenInterceptorService } from "../app/services/token-interceptor.servi
 
 //GUARDS
 import { AuthGuard } from "../app/guards/auth.guard";
+import { GameGuard } from "../app/guards/game.guard";
+import { FilmGuard } from "../app/guards/film.guard";
 
 //COMPONENTS
 import { AppRoutingModule } from './app-routing.module';
@@ -62,7 +64,8 @@ import { SingInComponent } from './components/user/sign-in/sing-in.component';
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     NgxPaginationModule
   ],
-  providers: [GamesService, FilmsService, MatDialogService, UserService, AuthGuard, {
+  providers: [GamesService, FilmsService, MatDialogService, UserService, 
+    AuthGuard, GameGuard, FilmGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

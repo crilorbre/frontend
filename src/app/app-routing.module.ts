@@ -13,6 +13,8 @@ import { SingInComponent } from './components/user/sign-in/sing-in.component';
 
 //GUARDS
 import { AuthGuard } from "../app/guards/auth.guard";
+import { GameGuard } from "../app/guards/game.guard";
+import { FilmGuard } from "../app/guards/film.guard";
 
 
 const routes: Routes = [
@@ -45,7 +47,7 @@ const routes: Routes = [
   {
     path:'games/edit/:id',
     component: GameFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, GameGuard]
   },
   {
     path: 'films',
@@ -59,7 +61,7 @@ const routes: Routes = [
   {
     path: 'films/edit/:id',
     component: FilmFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, FilmGuard]
   },
   {
     path: '**',
