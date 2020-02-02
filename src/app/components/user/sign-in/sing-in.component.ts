@@ -13,6 +13,8 @@ export class SingInComponent implements OnInit {
 
   user: User = {};
 
+  errorMessage: String = null;
+
   form = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -32,7 +34,8 @@ export class SingInComponent implements OnInit {
         localStorage.setItem('token', res['token'])
         this.router.navigate(['/'])
       },
-      err => console.log(err)
+      err => {console.log(err);
+        this.errorMessage = "Incorrect username or password!";}
     )
     
   }

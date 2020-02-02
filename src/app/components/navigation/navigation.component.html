@@ -26,9 +26,6 @@
         </ng-container>
 
         <ng-template #loggedIn>
-          <li class="nav-item">
-            <a class="nav-link" style="cursor: pointer;" (click) = "userService.logout()"><i class="fas fa-user-slash"></i>Logout</a>
-          </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,10 +50,13 @@
               </ng-container>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer;" (click) = "userService.logout()"><i class="fas fa-user-slash"></i>Logout</a>
+          </li>
         </ng-template>
 
         
-
       </ul>
     </div>
     </div>
