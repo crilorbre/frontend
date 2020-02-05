@@ -2,15 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/User";
 import { Router } from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  API_URI= "http://localhost:3000"
+  API_URI= "http://localhost:3000";
+  helper = new JwtHelperService();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,
+    private toastrService: ToastrService) { }
 
   signUp(user: User){
     return this.http.post(`${this.API_URI}/users/signup`, user)
@@ -22,7 +27,12 @@ export class UserService {
 
   loggedIn(): Boolean{
     if(localStorage.getItem('token')){
-      return true;
+      if(!this.helper.isTokenExpired(this.getToken())){
+        return true;
+      }else{
+        this.logout();
+        this.toastrService.info('Your session has expired. You have to login again')
+      }
     }
     return false;
   }
@@ -34,6 +44,7 @@ export class UserService {
   logout(){
     localStorage.removeItem('token');
     this.router.navigate(['/'])
+    this.toastrService.info('Logout succesfully')
   }
 
   getUserByEmail(email: String){
