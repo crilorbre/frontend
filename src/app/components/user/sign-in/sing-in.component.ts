@@ -31,7 +31,6 @@ export class SingInComponent implements OnInit {
 
     this.userService.signIn(this.user).subscribe(
       res => {
-        localStorage.setItem('token', res['token'])
         this.router.navigate(['/'])
       },
       err => {console.log(err);

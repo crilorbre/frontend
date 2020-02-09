@@ -4,6 +4,8 @@ import { User } from "../models/User";
 import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { ToastrService } from 'ngx-toastr';
+import { tap, catchError, mapTo } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -21,28 +23,54 @@ export class UserService {
     return this.http.post(`${this.API_URI}/users/signup`, user)
   }
 
-  signIn(user: User){
-    return this.http.post(`${this.API_URI}/users/signin`, user)
+  signIn(user: User): Observable<boolean>{
+    return this.http.post<any>(`${this.API_URI}/users/signin`, user).pipe(
+      tap(tokens => this.storeTokens(tokens)), mapTo(true),
+      catchError(error => {
+        alert(error.error);
+        return of(false);
+      })
+    );
+  }
+
+  private storeTokens(tokens){
+    localStorage.setItem('ACCESS_TOKEN', tokens.token)
+    localStorage.setItem('REFRESH_TOKEN', tokens.refreshToken)
   }
 
   loggedIn(): Boolean{
-    if(localStorage.getItem('token')){
-      if(!this.helper.isTokenExpired(this.getToken())){
+    if(localStorage.getItem('ACCESS_TOKEN')){
+      //if(!this.helper.isTokenExpired(this.getToken())){
         return true;
       }else{
-        this.logout();
-        this.toastrService.info('Your session has expired. You have to login again')
-      }
+        //this.logout();
+        //his.toastrService.info('Your session has expired. You have to login again')
+      //}
     }
     return false;
   }
 
   getToken(){
-    return localStorage.getItem('token');
+    return localStorage.getItem('ACCESS_TOKEN');
+  }
+
+  getRefreshToken(){
+    return localStorage.getItem('REFRESH_TOKEN');
+  }
+
+  refreshToken(){
+    return this.http.post<any>(`${this.API_URI}/users/refresh`, {
+      'refreshToken': this.getRefreshToken()
+    }).pipe(
+      tap(token => {
+        localStorage.setItem('ACCESS_TOKEN', token.accessToken)
+      }
+    ))
   }
 
   logout(){
-    localStorage.removeItem('token');
+    localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('REFRESH_TOKEN');
     this.router.navigate(['/'])
     this.toastrService.info('Logout succesfully')
   }
