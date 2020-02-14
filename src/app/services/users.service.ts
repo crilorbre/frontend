@@ -40,13 +40,9 @@ export class UserService {
 
   loggedIn(): Boolean{
     if(localStorage.getItem('ACCESS_TOKEN')){
-      //if(!this.helper.isTokenExpired(this.getToken())){
         return true;
-      }else{
-        //this.logout();
-        //his.toastrService.info('Your session has expired. You have to login again')
-      //}
-    }
+      }
+          
     return false;
   }
 
@@ -68,11 +64,11 @@ export class UserService {
     ))
   }
 
-  logout(){
+  logout(msg: string){
     localStorage.removeItem('ACCESS_TOKEN');
     localStorage.removeItem('REFRESH_TOKEN');
     this.router.navigate(['/'])
-    this.toastrService.info('Logout succesfully')
+    this.toastrService.info(msg)
   }
 
   getUserByEmail(email: String){

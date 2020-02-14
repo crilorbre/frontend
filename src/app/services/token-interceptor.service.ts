@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse, HttpEvent } from "@angular/common/http";
 import { UserService } from "../services/users.service";
 import { throwError, BehaviorSubject, Observable } from 'rxjs';
-import { catchError, filter, take, switchMap } from 'rxjs/operators';
+import { catchError, filter, take, switchMap, finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class TokenInterceptorService implements HttpInterceptor{
   constructor(private userService: UserService) { }
 
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-    //Si localstore tiene un token, se lo añadimos a la cabecera
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> | any{
+    //Si localStore tiene un token, se lo añadimos a la cabecera
     //con el esquema Bearer 'token'
     if(this.userService.getToken()){
       request = this.addToken(request, this.userService.getToken())
@@ -24,6 +24,9 @@ export class TokenInterceptorService implements HttpInterceptor{
     return next.handle(request).pipe(catchError(error => {
       if(error instanceof HttpErrorResponse && error.status === 401){
         return this.handle401Error(request, next);
+      }else if(error instanceof HttpErrorResponse && error.status === 500){
+        this.userService.logout('Your session has expired. You have to login again!')
+        return throwError (error);
       }else{
         return throwError (error);
       }
@@ -42,9 +45,12 @@ export class TokenInterceptorService implements HttpInterceptor{
           this.isRefreshing = false;
           this.refreshTokenSubject.next(token.accessToken);
           return next.handle(this.addToken(request, token.accessToken));
+        }), finalize(() => {
+          this.isRefreshing = false;
         }));
   
     } else {
+      
       return this.refreshTokenSubject.pipe(
         filter(token => token != null),
         take(1),
