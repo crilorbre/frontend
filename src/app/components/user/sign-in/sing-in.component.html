@@ -24,10 +24,9 @@
                         <mat-error *ngIf="form.get('password').touched && form.get('password').hasError('required')">Password is required!</mat-error> 
                     </div>
 
-                    <mat-error *ngIf="form.get('username').touched && form.get('username').hasError('required')">Username is required!</mat-error>
                     <mat-error *ngIf= "errorMessage != null">{{errorMessage}}</mat-error><br>
                     <p>Don't have account?<a routerLink="../../user/register">Register here!</a></p>
-                    <button class="btn btn-info btn-block">
+                    <button class="btn btn-info btn-block" [disabled]="form.invalid">
                         Login
                     </button>
                 </form>
