@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card border border-dark">
+
+            <div class="card-body">
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTDpni3N1kRP-Cf9Le1ejpPNC2Mi8Zutxu_bTqgJQbIeSwIib_p" class="img-fluid rounded-circle w-50 card-img-top" alt="...">
+
+                <h3>{{user.firstName}}<br/></h3>
+                <h3>{{user.lastName}}<br/></h3>
+                <h3>{{user.email}}<br/></h3>
+                <h3>{{user.username}}<br/></h3>
+
+                <form [formGroup]="form" (ngSubmit) = "onSubmit()">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input matInput type="password" name="oldPassword" 
+                        placeholder="Your password" class="form-control" formControlName="oldPassword">
+                    </div>
+
+                    <div class="form-group">
+                        <label>New password</label>
+                        <input matInput type="password" name="password" 
+                        placeholder="Your new password" class="form-control" formControlName="password"
+                        [ngClass]="{'is-invalid': form.get('password').touched && form.get('password').invalid}">
+                        <mat-error *ngIf="form.get('password').touched && form.get('password').hasError('pattern')">Enter a combination of 8 to 16 numbers and lowercase and uppercase characters!</mat-error>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm your new password</label>
+                        <input matInput type="password" name="confirmPassword" 
+                        placeholder="Your password" class="form-control" formControlName="confirmPassword"
+                        [ngClass]="{'is-invalid': form.get('confirmPassword').touched && form.get('confirmPassword').invalid}">
+                        <mat-error *ngIf="form.get('confirmPassword').touched && form.errors?.noMatch">Passwords doesn't match!</mat-error>                    
+                    </div>
+
+                    <button class="btn btn-success btn-block" [disabled]="form.invalid">
+                        Save
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

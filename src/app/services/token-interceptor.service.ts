@@ -37,6 +37,7 @@ export class TokenInterceptorService implements HttpInterceptor{
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {
+      //Refrescar el token
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
   
@@ -50,7 +51,9 @@ export class TokenInterceptorService implements HttpInterceptor{
         }));
   
     } else {
-      
+      //Si durante el proceso de actualizacion del token
+      //se realizan mas llamadas, utilizaremos
+      //el nuevo token obtenido
       return this.refreshTokenSubject.pipe(
         filter(token => token != null),
         take(1),

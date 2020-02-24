@@ -15,6 +15,7 @@ import { SingInComponent } from './components/user/sign-in/sing-in.component';
 import { AuthGuard } from "../app/guards/auth.guard";
 import { GameGuard } from "../app/guards/game.guard";
 import { FilmGuard } from "../app/guards/film.guard";
+import { ProfileComponent } from './components/user/profile/profile.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'user/login',
     component: SingInComponent
+  },
+  {
+    path: 'user/profile',
+    component: ProfileComponent
   },
   {
     path: 'games',

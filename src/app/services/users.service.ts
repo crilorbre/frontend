@@ -29,6 +29,14 @@ export class UserService {
     );
   }
 
+  profile(){
+    return this.http.get(`${enviroment_var.SERVER_URL}/users/profile`)
+  }
+
+  updateUser(user: User){
+    return this.http.post(`${enviroment_var.SERVER_URL}/users/update`, user)
+  }
+
   private storeTokens(tokens){
     localStorage.setItem('ACCESS_TOKEN', tokens.token)
     localStorage.setItem('REFRESH_TOKEN', tokens.refreshToken)

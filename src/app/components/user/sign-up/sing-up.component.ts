@@ -34,7 +34,6 @@ export class SingUpComponent implements OnInit {
   saveNewUser(){
     this.userService.signUp(this.user).subscribe(
       res => {
-        console.log(res),
         this.router.navigate(['/user/login'])
         this.toastrService.success('User registration successful')
       },

@@ -33,8 +33,13 @@ export class SingInComponent implements OnInit {
       res => {
         this.router.navigate(['/'])
       },
-      err => {console.log(err);
-        this.errorMessage = "Incorrect username or password!";}
+      err => {
+        if(err.status === 404 || 403){
+          this.errorMessage = "Incorrect username or password!";
+        }else{
+          this.errorMessage = "You can't login in this moment. Please, try it more late"
+        }
+      }
     )
     
   }

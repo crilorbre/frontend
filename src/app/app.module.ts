@@ -32,6 +32,7 @@ import { FilmListComponent } from './components/film/film-list/film-list.compone
 import { FilmFormComponent } from './components/film/film-form/film-form.component';
 import { SingUpComponent } from './components/user/sign-up/sing-up.component';
 import { SingInComponent } from './components/user/sign-in/sing-in.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { SingInComponent } from './components/user/sign-in/sing-in.component';
     FilmListComponent,
     FilmFormComponent,
     SingUpComponent,
-    SingInComponent
+    SingInComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
